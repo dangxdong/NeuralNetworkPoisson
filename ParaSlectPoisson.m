@@ -24,12 +24,12 @@ if (~exist("layer_size_list"))
                                         min(20, round(input_layer_size*1.5))];
 end
 
-if (~exist("miniIter")) 
-    miniIter=500;
-end
-
 if (~exist("lambda_list"))
     lambda_list = [0.01, 0.1];
+end
+
+if (~exist("miniIter")) 
+    miniIter=1000;
 end
 
 nn = length(layer_size_list);
