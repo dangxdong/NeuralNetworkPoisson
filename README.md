@@ -61,4 +61,6 @@ First released date: 2016-02-26
  IF you don't specify a value for miniIter, a value 500 will be used,
  running 3250 iterations for test and give result based on 1250 iterations.
 
+Those files with "2hl" in their names are for a two-hidden-layer model. Try them out if you are confident with your computer.
+
 Take your time and enjoy!
