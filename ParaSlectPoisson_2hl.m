@@ -45,29 +45,29 @@ for i=1:nn
     hidden_layer_size1 = layer_size_list(i);
     hidden_layer_size2 = layer_size_list(i);
     
-    initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size1);
-    initial_Theta2 = randInitializeWeights(hidden_layer_size1, hidden_layer_size2);
-    initial_Theta3 = randInitializeWeights(hidden_layer_size2, num_labels);
+    initial_Theta1 = randInitGrad(input_layer_size, hidden_layer_size1);
+    initial_Theta2 = randInitGrad(hidden_layer_size1, hidden_layer_size2);
+    initial_Theta3 = randInitGrad(hidden_layer_size2, num_labels);
     initial_nn_params1 = [initial_Theta1(:) ; initial_Theta2(:); initial_Theta3(:)];
     
-    initial_Theta4 = randInitializeWeights(input_layer_size, hidden_layer_size1);
-    initial_Theta5 = randInitializeWeights(hidden_layer_size1, hidden_layer_size2);
-    initial_Theta6 = randInitializeWeights(hidden_layer_size2, num_labels);
+    initial_Theta4 = randInitGrad(input_layer_size, hidden_layer_size1);
+    initial_Theta5 = randInitGrad(hidden_layer_size1, hidden_layer_size2);
+    initial_Theta6 = randInitGrad(hidden_layer_size2, num_labels);
     initial_nn_params2 = [initial_Theta4(:) ; initial_Theta5(:); initial_Theta6(:)];
     
-    initial_Theta7 = randInitializeWeights(input_layer_size, hidden_layer_size1);
-    initial_Theta8 = randInitializeWeights(hidden_layer_size1, hidden_layer_size2);
-    initial_Theta9 = randInitializeWeights(hidden_layer_size2, num_labels);
+    initial_Theta7 = randInitGrad(input_layer_size, hidden_layer_size1);
+    initial_Theta8 = randInitGrad(hidden_layer_size1, hidden_layer_size2);
+    initial_Theta9 = randInitGrad(hidden_layer_size2, num_labels);
     initial_nn_params3 = [initial_Theta7(:) ; initial_Theta8(:); initial_Theta9(:)];
     
-    initial_Theta10 = randInitializeWeights(input_layer_size, hidden_layer_size1);
-    initial_Theta11 = randInitializeWeights(hidden_layer_size1, hidden_layer_size2);
-    initial_Theta12 = randInitializeWeights(hidden_layer_size2, num_labels);
+    initial_Theta10 = randInitGrad(input_layer_size, hidden_layer_size1);
+    initial_Theta11 = randInitGrad(hidden_layer_size1, hidden_layer_size2);
+    initial_Theta12 = randInitGrad(hidden_layer_size2, num_labels);
     initial_nn_params4 = [initial_Theta10(:) ; initial_Theta11(:); initial_Theta12(:)];
     
-    initial_Theta13 = randInitializeWeights(input_layer_size, hidden_layer_size1);
-    initial_Theta14 = randInitializeWeights(hidden_layer_size1, hidden_layer_size2);
-    initial_Theta15 = randInitializeWeights(hidden_layer_size2, num_labels);
+    initial_Theta13 = randInitGrad(input_layer_size, hidden_layer_size1);
+    initial_Theta14 = randInitGrad(hidden_layer_size1, hidden_layer_size2);
+    initial_Theta15 = randInitGrad(hidden_layer_size2, num_labels);
     initial_nn_params5 = [initial_Theta13(:) ; initial_Theta14(:); initial_Theta15(:)];
     
     for j=1:nl
