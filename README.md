@@ -1,9 +1,8 @@
 # NeuralNetworkPoisson
 A Neural Network model in Matlab | Octave for count number prediction.
-First released date: 2016-02-26
-The codes are written to be used in Octave | Matlab 
-Author: Xiaodong Dang, dangxdong@hotmail.com
-First released date: 2016-02-26
+# First released date: 2016-02-26
+# Author: Xiaodong Dang, dangxdong@hotmail.com
+# First released date: 2016-02-26
 
  Implementing artificial neural network 
  with a single hidden layer
