@@ -83,11 +83,11 @@ for i=1:nn
         % Do the modelling
         % Strategy: use the first (miniIter) iterations to run all the initial thetas
         % choose the best one to run another (1.5*miniIter) iterations to give the answer.
-        [nn_params1, cost1] = fmincg(costFunction, initial_nn_params1, options);
-        [nn_params2, cost2] = fmincg(costFunction, initial_nn_params2, options);
-        [nn_params3, cost3] = fmincg(costFunction, initial_nn_params3, options);
-        [nn_params4, cost4] = fmincg(costFunction, initial_nn_params4, options);
-        [nn_params5, cost5] = fmincg(costFunction, initial_nn_params5, options);
+        [nn_params1, cost1] = fminunc(costFunction, initial_nn_params1, options);
+        [nn_params2, cost2] = fminunc(costFunction, initial_nn_params2, options);
+        [nn_params3, cost3] = fminunc(costFunction, initial_nn_params3, options);
+        [nn_params4, cost4] = fminunc(costFunction, initial_nn_params4, options);
+        [nn_params5, cost5] = fminunc(costFunction, initial_nn_params5, options);
         
         [mincost, maxID] = min([cost1(end), cost2(end), cost3(end), ...
                            cost4(end), cost5(end)]);
@@ -108,7 +108,7 @@ for i=1:nn
         options = optimset('MaxIter', round(miniIter*1.5));
         
         % Bring the nn_paramsM to go on optimization
-        [nn_params, cost] = fmincg(costFunction, nn_paramsM, options);     
+        [nn_params, cost] = fminunc(costFunction, nn_paramsM, options);     
 
         Theta1 = reshape(nn_params(1:hidden_layer_size1 * (input_layer_size + 1)), ...
                  hidden_layer_size1, (input_layer_size + 1));
