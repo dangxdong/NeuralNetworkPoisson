@@ -59,4 +59,4 @@ First released date: 2016-02-26
  IF you don't specify a value for miniIter, a value 500 will be used,
  running 3250 iterations for test and give result based on 1250 iterations.
 
- Take your time play with it. Wish you good luck.
+Take your time.
