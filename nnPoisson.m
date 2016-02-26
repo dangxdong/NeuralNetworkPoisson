@@ -41,6 +41,10 @@ function [Theta1, Theta2] = nnPoisson(X, y, ...
 input_layer_size  = size(X,2);
 num_labels = size(y,2);
 
+if (~exist("hidden_layer_size")) 
+    hidden_layer_size = min(5, round(input_layer_size*0.5))
+end
+
 initial_Theta1 = randInitGrad(input_layer_size, hidden_layer_size);
 initial_Theta2 = randInitGrad(hidden_layer_size, num_labels);
 initial_nn_params1 = [initial_Theta1(:) ; initial_Theta2(:)];
