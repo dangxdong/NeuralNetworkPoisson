@@ -76,7 +76,7 @@ options = optimset('MaxIter', iteration);
 [nn_params4, cost4] = fminunc(costFunction, initial_nn_params4, options);
 [nn_params5, cost5] = fminunc(costFunction, initial_nn_params5, options);
 
-[mincost, minID] = min([cost1(end), cost2(end), cost3(end)], ...
+[mincost, minID] = min([cost1(end), cost2(end), cost3(end), ...
                    cost4(end), cost5(end)]);
 
 switch (minID)
