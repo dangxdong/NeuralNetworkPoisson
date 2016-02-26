@@ -12,6 +12,8 @@ First released date: 2016-02-26
  RMSLE is used as optimization target in the cost function
  see the nnCostFuncPoisson_RMSLE.m
  for more details.
+ 
+ (Reference for RMSLE: https://www.kaggle.com/c/bike-sharing-demand/details/evaluation).
 
  nnPoisson.m 
  is the entry point, in the form of 
