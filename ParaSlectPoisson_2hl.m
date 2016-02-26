@@ -1,6 +1,6 @@
 function [opti_hidden_layer_size, opti_lambda, RMSLEvalMatrix, ...
         RMSLEtrainMatrix] = ParaSlectPoisson_2hl(X, y, Xval, yval, ...
-        layer_size_list, lambda_list, miniIter)
+        layer_size_list, lambda_list, miniIter=1000)
 
 % Only looking at a single 'best' size or lambda value may not be perfect, so
 % it's better to also return the accuracy matrix, to manualy see 
@@ -22,10 +22,6 @@ num_labels = size(y,2); % The output y has 4 columns
 if (~exist("layer_size_list")) 
     layer_size_list = [min(10, round(input_layer_size*0.5)), ...
                                         min(20, round(input_layer_size*1.5))];
-end
-
-if (~exist("miniIter")) 
-    miniIter=500;
 end
 
 if (~exist("lambda_list"))
