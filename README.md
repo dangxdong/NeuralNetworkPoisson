@@ -41,6 +41,6 @@ Implemented an artificial neural network with a single/double hidden layer adapt
  
  IF you don't specify a value for miniIter, a default value 500 will be used, running 3250 iterations for test and give result based on 1250 iterations.
 
-Those files with "2hl" in their names are the files for a two-hidden-layer model. Try them out if you are confident with your computer's performance. Much more iterations (> 3000~4000 for each parameter set) are needed to see any overfitting effect before overcoming it.
+Those files with "2hl" in their names are the files for a two-hidden-layer model. Try them out if you are confident with your computer's performance. Much more iterations (> 3000~4000 for each parameter set) are needed to see any overfitting effect before overcoming it. Also mind that the input/output will involve three theta's, rather than two.
 
 Take your time and enjoy!
