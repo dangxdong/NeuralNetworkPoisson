@@ -40,24 +40,18 @@ Theta3_grad = zeros(size(Theta3));
 
 X1 = [ones(m,1) X]; % so X1 is m * (n+1)
 ZZ1 = Theta1 * X1'; % so ZZ1 is n(L2)*m dimensional
-
 AA1 = 1.0 ./ (1.0 + exp(-ZZ1)); % predicted middle layer unit values
 
 % From hidden layer to output layer 
 AA1 = [ones(1, m); AA1]; % Now AA1 is(n(L2)+1)*m
 ZZ2 = Theta2 * AA1; % ZZ2 is k*m
-
-
 AA2 =  1.0 ./ (1.0 + exp(-ZZ2));
-
 AA2 = [ones(1, m); AA2]; % Now AA2 is(n(L3)+1)*m
 
 % As Theta3 is n(L4) * (n(L3)+1) = k*(n(L3)+1)
 ZZ3 = Theta3 * AA2; % ZZ3 is n(L4)*m = k*m
 AA3 = exp(ZZ3);
-
 hh= AA3';
-
 
 % Calculate cost.
 subtraction = log(hh+1) - log(y+1);
@@ -72,9 +66,9 @@ Temp2 = Theta2;
 Temp2(:, 1) = 0;
 Temp3 = Theta3;
 Temp3(:, 1) = 0;
-termR = 0.5 * lambda / m * (sum(dot(Temp1,Temp1))+sum(dot(Temp2,Temp2))+sum(dot(Temp3,Temp3)));
-
-J2 = J1 + termR; % Now cost is regularised.
+termR = 0.5*lambda/m*(sum(dot(Temp1,Temp1))+sum(dot(Temp2,Temp2))+sum(dot(Temp3,Temp3)));
+J2 = J1 + termR; 
+% Now cost is regularised.
 
 %%% Implement backpropagation %%%
 
@@ -82,18 +76,17 @@ J2 = J1 + termR; % Now cost is regularised.
 % use the transposes y' and AA3 instead of y and hh, both k*m
 % Implementing the gradient function for RMSLE of Poisson regression
 
-delta4 = log(AA3 + 1) - log(y' + 1);
-delta4 = delta4 .* AA3 ./ (1 + AA3) ./ J1;
+delta4 = (log(AA3 + 1) - log(y' + 1)) .* AA3 ./ (1 + AA3) ./ J1;
 
+sigterm3 = sgmdGrad(ZZ2);
 delta3 = Theta3' * delta4;
 delta3 = delta3(2:end,:);
-sigterm3 = sgmdGrad(ZZ2);
 delta3 = delta3 .* sigterm3;
 
-% Then back propagation is the same as plain neural network (logistic regression)
+% Afterward back propagation is the same as plain neural network (logistic regression).
+sigterm2 = sgmdGrad(ZZ1);
 delta2 = Theta2' * delta3;    %(n(L2)+1)*1.
 delta2 = delta2(2:end,:);
-sigterm2 = sgmdGrad(ZZ1);
 delta2 = delta2 .* sigterm2;   
 
 % Give values to the Gradient matrices:
@@ -107,6 +100,6 @@ Theta2_grad = 1 / m .* (Theta2_grad + lambda .* Temp2);
 Theta3_grad = 1 / m .* (Theta3_grad + lambda .* Temp3);
 
 % Unroll gradients to be returned by the function.
-grad = [Theta1_grad(:) ; Theta2_grad(:); Theta3_grad(:)];
+grad = [Theta1_grad(:); Theta2_grad(:); Theta3_grad(:)];
 
 end
