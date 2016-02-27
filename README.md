@@ -36,10 +36,10 @@ Implemented an artificial neural network with a single/double hidden layer adapt
  
  With ParaSlectPoisson, the user can specify a list for each of the two parameters to input or they will be automatically decided by the function. The user should also specify an integer for miniIter, which decides how many iterations are in the optimization.
  
- !!! Note if you specify miniIter=1000, the function will actually run 1000*5+150=6500 iterations for testing, and 
+ !!! IF you specify miniIter=1000, the function will actually run 1000*5+1500=6500 iterations for testing, and 
  return the results based on 1000+1500=2500 iterations for each combination.
  
- IF you don't specify a value for miniIter, a value 500 will be used, running 3250 iterations for test and give result based on 1250 iterations.
+ IF you don't specify a value for miniIter, a default value 500 will be used, running 3250 iterations for test and give result based on 1250 iterations.
 
 Those files with "2hl" in their names are the files for a two-hidden-layer model. Try them out if you are confident with your computer's performance. Much more iterations (> 3000~4000 for each parameter set) are needed to see any overfitting effect before overcoming it.
 
