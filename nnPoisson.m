@@ -1,5 +1,5 @@
 function [Theta1, Theta2] = nnPoisson(X, y, ...
-                           hidden_layer_size, lambda = 0, iteration = 1000)
+                           hidden_layer_size, lambda = 0, iteration = 1000, NumTrial = 10)
 
 % This function is partly adapted from the homeworks of the online course
 % "Machine Learning" on Cousera by Stanford University.
@@ -45,25 +45,18 @@ if (~exist("hidden_layer_size"))
     hidden_layer_size = min(5, round(input_layer_size*0.5))
 end
 
-initial_Theta1 = randInitGrad(input_layer_size, hidden_layer_size);
-initial_Theta2 = randInitGrad(hidden_layer_size, num_labels);
-initial_nn_params1 = [initial_Theta1(:) ; initial_Theta2(:)];
+initial_Theta1_Meta = zeros(hidden_layer_size, input_layer_size+1, NumTrial);
+initial_Theta2_Meta = zeros(num_labels, hidden_layer_size+1, NumTrial);
+initial_nn_params1_Meta = zeros(hidden_layer_size*(input_layer_size+1)+ ...
+                                   num_labels*(hidden_layer_size+1), NumTrial);
 
-initial_Theta3 = randInitGrad(input_layer_size, hidden_layer_size);
-initial_Theta4 = randInitGrad(hidden_layer_size, num_labels);
-initial_nn_params2 = [initial_Theta3(:) ; initial_Theta4(:)];
-
-initial_Theta5 = randInitGrad(input_layer_size, hidden_layer_size);
-initial_Theta6 = randInitGrad(hidden_layer_size, num_labels);
-initial_nn_params3 = [initial_Theta5(:) ; initial_Theta6(:)];
-
-initial_Theta7 = randInitGrad(input_layer_size, hidden_layer_size);
-initial_Theta8 = randInitGrad(hidden_layer_size, num_labels);
-initial_nn_params4 = [initial_Theta7(:) ; initial_Theta8(:)];
-
-initial_Theta9 = randInitGrad(input_layer_size, hidden_layer_size);
-initial_Theta10 = randInitGrad(hidden_layer_size, num_labels);
-initial_nn_params5 = [initial_Theta9(:) ; initial_Theta10(:)];
+for ii=1:NumTrial
+    initial_Theta1_Meta(:,:,ii) = randInitGrad(input_layer_size, ...
+                                                            hidden_layer_size);
+    initial_Theta2_Meta(:,:,ii) = randInitGrad(hidden_layer_size, num_labels);
+    initial_nn_params1_Meta(:,ii) = [initial_Theta1_Meta(:,:,ii)(:); ...
+                                                initial_Theta2_Meta(:,:,ii)(:)];
+end
 
 costFunction = @(p) nnCostFuncPoisson_RMSLE(p, ...
                            input_layer_size, ...
@@ -74,35 +67,32 @@ options = optimset('MaxIter', iteration);
 % Do the modelling
 % Strategy: use the first 1000 iterations to run all the initial thetas
 % choose the best one to run another 1500 iterations to give the answer.
-[nn_params1, cost1] = fminunc(costFunction, initial_nn_params1, options);
-[nn_params2, cost2] = fminunc(costFunction, initial_nn_params2, options);
-[nn_params3, cost3] = fminunc(costFunction, initial_nn_params3, options);
-[nn_params4, cost4] = fminunc(costFunction, initial_nn_params4, options);
-[nn_params5, cost5] = fminunc(costFunction, initial_nn_params5, options);
 
-[mincost, minID] = min([cost1(end), cost2(end), cost3(end), ...
-                   cost4(end), cost5(end)]);
-
-switch (minID)
-    case 1
+% Set a reference value to ease the loop.
+cost_reference = 100000000.0;
+% Run a loop to give the value of nn_params1 with smallest cost1 to nn_paramsM
+for jj=1:NumTrial
+    initial_nn_params_temp = initial_nn_params1_Meta(:,jj);
+    [nn_params1, cost1] = fminunc(costFunction, initial_nn_params_temp, options);
+    if cost1(end) < cost_reference
+        cost_reference = cost1(end);
         nn_paramsM = nn_params1;
-    case 2
-        nn_paramsM = nn_params2;
-    case 3
-        nn_paramsM = nn_params3;
-    case 4
-        nn_paramsM = nn_params4;
-    otherwise
-        nn_paramsM = nn_params5;
+        % Optionally, can set a threshold here to quit the loop early, 
+        % once a fairly low cost is reached.
+        % if cost_reference < 0.5350
+        %     break;
+        % end
+    end
 end
+options = optimset('MaxIter', round(iteration*1.5)); 
+% can change 1.5 to bigger numbers to achieve smaller cost.
 
-options = optimset('MaxIter', round(iteration*1.5));
+% Pass nn_paramsM to the next round of iterations.
 [nn_params, cost] = fminunc(costFunction, nn_paramsM, options);     
 
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
          hidden_layer_size, (input_layer_size + 1));
 Theta2 = reshape(nn_params((1 + hidden_layer_size * (input_layer_size + 1)):end), ...
          num_labels, (hidden_layer_size + 1));
-
 
 end
