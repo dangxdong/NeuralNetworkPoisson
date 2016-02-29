@@ -1,4 +1,4 @@
-% Run your codes like csvread("***.csv", 1, 0) 
+% Run your codes like csvread('***.csv', 1, 0) 
 % to get X, y, Xval and yval matrices as the training and validation sets.
 % Note to keep only numeric values in the data sets.
 
