@@ -19,12 +19,12 @@ input_layer_size  = size(X,2);  % 12 original variables
 num_labels = size(y,2); % The output y has 4 columns
 
 % set candidate list of of hidden layer sizes and lambda values
-if (~exist("layer_size_list")) 
+if (~exist('layer_size_list')) 
     layer_size_list = [min(10, round(input_layer_size*0.5)), ...
                                         min(20, round(input_layer_size*1.5))];
 end
 
-if (~exist("lambda_list"))
+if (~exist('lambda_list'))
     lambda_list = [0.01, 0.1];
 end
 
