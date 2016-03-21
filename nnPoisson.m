@@ -1,5 +1,5 @@
 function [Theta1, Theta2] = nnPoisson(X, y, ...
-                           hidden_layer_size, lambda = 0, iteration = 1000, NumTrial = 10)
+                           hidden_layer_size = 0, lambda = 0, iteration = 1000, NumTrial = 10)
 
 % This function is partly adapted from the homeworks of the online course
 % "Machine Learning" on Cousera by Stanford University.
@@ -41,8 +41,8 @@ function [Theta1, Theta2] = nnPoisson(X, y, ...
 input_layer_size  = size(X,2);
 num_labels = size(y,2);
 
-if (~exist("hidden_layer_size")) 
-    hidden_layer_size = min(5, round(input_layer_size*0.5))
+if (hidden_layer_size == 0) 
+    hidden_layer_size = min(10, round(input_layer_size*0.5))
 end
 % Use 3-dimensional matrices to store the candidate theta matrices.
 initial_Theta1_Meta = zeros(hidden_layer_size, input_layer_size+1, NumTrial);
