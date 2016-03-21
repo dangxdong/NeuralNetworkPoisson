@@ -1,4 +1,4 @@
-function [Theta1, Theta2] = nnPoisson(X, y, ...
+function [Theta1, Theta2, traincost] = nnPoisson(X, y, ...
                            hidden_layer_size = 0, lambda = 0, iteration = 1000, NumTrial = 10)
 
 % This function is partly adapted from the homeworks of the online course
@@ -89,6 +89,8 @@ options = optimset('MaxIter', round(iteration*1.5));
 
 % Pass nn_paramsM to the next round of iterations.
 [nn_params, cost] = fminunc(costFunction, nn_paramsM, options);     
+
+traincost = cost(end);
 
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
          hidden_layer_size, (input_layer_size + 1));
