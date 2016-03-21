@@ -1,5 +1,5 @@
-function [Theta1, Theta2, Theta3] = nnPoisson_2hl(X, y, ...
-                           hidden_layer_size1, hidden_layer_size2, lambda = 0, miniIter = 1000)
+function [Theta1, Theta2, Theta3, traincost] = nnPoisson_2hl(X, y, ...
+                           hidden_layer_size1 = 0, hidden_layer_size2 = 0, lambda = 0, miniIter = 1000)
 
 % This function is partly adapted from the homeworks of the online course
 % "Machine Learning" on Cousera by Stanford University.
@@ -39,11 +39,11 @@ function [Theta1, Theta2, Theta3] = nnPoisson_2hl(X, y, ...
 input_layer_size  = size(X,2);
 num_labels = size(y,2);
 
-if (~exist("hidden_layer_size1")) 
-    hidden_layer_size1 = min(5, round(input_layer_size*0.5))
+if (hidden_layer_size1 == 0) 
+    hidden_layer_size1 = min(10, round(input_layer_size*0.5))
 end
-if (~exist("hidden_layer_size2")) 
-    hidden_layer_size2 = min(5, round(input_layer_size*0.5))
+if (hidden_layer_size2 == 0) 
+    hidden_layer_size2 = min(10, round(input_layer_size*0.5))
 end
 
 initial_Theta1 = randInitGrad(input_layer_size, hidden_layer_size1);
@@ -105,6 +105,8 @@ end
 
 options = optimset('MaxIter', round(miniIter*1.5));
 [nn_params, cost] = fminunc(costFunction, nn_paramsM, options);     
+
+traincost = cost(end);
 
 Theta1 = reshape(nn_params(1:hidden_layer_size1 * (input_layer_size + 1)), ...
                  hidden_layer_size1, (input_layer_size + 1));
