@@ -8,7 +8,7 @@ Implemented an artificial neural network (ANN) with a single/double hidden layer
  
  RMSLE is used as optimization target in the cost function. (see the nnCostFuncPoisson_RMSLE.m for more details.)
  
- (Reference for RMSLE: https://www.kaggle.com/c/bike-sharing-demand/details/evaluation) The ANN model here is tried with the Kaggle Bike sharing dataset, and could have ranked top 5% on the leaderboard.
+ (Reference for RMSLE: https://www.kaggle.com/c/bike-sharing-demand/details/evaluation) The ANN model here is tried with the Kaggle Bike Sharing dataset, and could have ranked top 5% on the leaderboard.
  
 
  nnPoisson.m is the entry point, in the form of [Theta1, Theta2] = nnPoisson(X, y, hidden_layer_size, lambda = 0, iteration = 1000)
