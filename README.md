@@ -2,13 +2,14 @@
 A Neural Network model in Matlab | Octave for count number prediction.
 First released date: 2016-02-26
 
-Implemented an artificial neural network with a single/double hidden layer adapted to predict count numbers, by using Poisson Regression between the last hidden layer and the output layer.
+Implemented an artificial neural network (ANN) with a single/double hidden layer adapted to predict count numbers, by using Poisson Regression between the last hidden layer and the output layer.
 
  nnCostFuncPoisson_RMSLE.m is the kernel of this model, which is adapted from a simple neural network model.
  
  RMSLE is used as optimization target in the cost function. (see the nnCostFuncPoisson_RMSLE.m for more details.)
  
- (Reference for RMSLE: https://www.kaggle.com/c/bike-sharing-demand/details/evaluation)
+ (Reference for RMSLE: https://www.kaggle.com/c/bike-sharing-demand/details/evaluation) The ANN model here is tried with the Kaggle Bike sharing dataset, and could have ranked top 5% on the leaderboard.
+ 
 
  nnPoisson.m is the entry point, in the form of [Theta1, Theta2] = nnPoisson(X, y, hidden_layer_size, lambda = 0, iteration = 1000)
  
